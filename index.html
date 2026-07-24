@@ -12,13 +12,13 @@
         .input-group { margin-bottom: 12px; text-align: left; }
         label { font-size: 13px; color: #cbd5e1; margin-bottom: 4px; display: block; }
         input, textarea { width: 100%; padding: 10px; border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.2); background: rgba(0, 0, 0, 0.3); color: #fff; font-size: 14px; outline: none; }
-        button { width: 100%; padding: 12px; background: linear-gradient(45deg, #ff007f, #7928ca); border: none; color: white; font-size: 16px; font-weight: bold; border-radius: 10px; cursor: pointer; margin-top: 10px; }
+        button, .video-btn { width: 100%; padding: 12px; background: linear-gradient(45deg, #ff007f, #7928ca); border: none; color: white; font-size: 16px; font-weight: bold; border-radius: 10px; cursor: pointer; margin-top: 10px; display: inline-block; text-decoration: none; box-shadow: 0 4px 15px rgba(255, 0, 127, 0.3); }
         #qrcode-container { margin-top: 15px; display: none; flex-direction: column; align-items: center; }
         #qrImage { background: white; padding: 10px; border-radius: 12px; width: 180px; height: 180px; margin-bottom: 10px; }
         .title { font-size: 1.8rem; color: #ff79c6; margin-bottom: 10px; }
         .name { font-size: 2rem; color: #50fa7b; font-weight: bold; margin-bottom: 15px; }
-        .video-box { width: 100%; border-radius: 12px; overflow: hidden; margin-bottom: 15px; background: #000; box-shadow: 0 5px 15px rgba(0,0,0,0.5); }
-        .video-box iframe, .video-box video { width: 100%; height: 230px; border: none; display: block; }
+        .video-box { width: 100%; border-radius: 12px; overflow: hidden; margin-bottom: 15px; background: rgba(0, 0, 0, 0.4); border: 1px solid rgba(255, 255, 255, 0.1); }
+        .video-box iframe { width: 100%; height: 220px; border: none; display: block; }
         .message-box { background: rgba(255, 255, 255, 0.1); padding: 15px; border-radius: 12px; font-size: 0.95rem; line-height: 1.4; color: #f8f8f2; margin-bottom: 15px; text-align: left; border-left: 4px solid #ff79c6; }
         .balloon { position: absolute; width: 40px; height: 60px; background: rgba(255, 121, 198, 0.7); border-radius: 50%; animation: floatUp 8s linear infinite; bottom: -100px; z-index: 1; }
         @keyframes floatUp { 0% { transform: translateY(0); opacity: 1; } 100% { transform: translateY(-120vh); opacity: 0; } }
@@ -76,19 +76,24 @@
                 document.getElementById('displayName').innerText = decodeURIComponent(name);
                 document.getElementById('displayMsg').innerText = decodeURIComponent(msg);
 
-                let videoUrl = decodeURIComponent(video || '');
-                
-                // Format Google Drive Link to Play Embedded Video
-                if (videoUrl.includes('drive.google.com') && videoUrl.includes('/view')) {
-                    videoUrl = videoUrl.replace('/view', '/preview');
-                } else if (videoUrl.includes('youtube.com/watch?v=')) {
-                    videoUrl = videoUrl.replace('watch?v=', 'embed/');
-                } else if (videoUrl.includes('youtu.be/')) {
-                    videoUrl = videoUrl.replace('youtu.be/', 'www.youtube.com/embed/');
+                let rawUrl = decodeURIComponent(video || '');
+                let embedUrl = rawUrl;
+
+                if (rawUrl.includes('drive.google.com') && rawUrl.includes('/view')) {
+                    embedUrl = rawUrl.replace('/view', '/preview');
+                } else if (rawUrl.includes('youtube.com/watch?v=')) {
+                    embedUrl = rawUrl.replace('watch?v=', 'embed/');
+                } else if (rawUrl.includes('youtu.be/')) {
+                    embedUrl = rawUrl.replace('youtu.be/', 'www.youtube.com/embed/');
                 }
 
-                if (videoUrl) {
-                    document.getElementById('videoContainer').innerHTML = `<iframe src="${videoUrl}" allowfullscreen></iframe>`;
+                if (rawUrl) {
+                    document.getElementById('videoContainer').innerHTML = `
+                        <iframe src="${embedUrl}" allow="autoplay"></iframe>
+                        <div style="padding: 10px; background: rgba(0,0,0,0.5);">
+                            <a href="${rawUrl}" target="_blank" class="video-btn" style="margin-top: 0; font-size: 14px;">▶️ Video Fullscreen Play Karein</a>
+                        </div>
+                    `;
                 } else {
                     document.getElementById('videoContainer').style.display = 'none';
                 }
