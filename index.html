@@ -3,25 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Birthday Wish</title>
+    <title>Funny Birthday Wish 🤪</title>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: sans-serif; }
-        body { background: linear-gradient(135deg, #0f172a, #1e1b4b, #31103f); color: #fff; min-height: 100vh; display: flex; justify-content: center; align-items: center; padding: 20px; overflow-x: hidden; }
-        .container { background: rgba(255, 255, 255, 0.08); backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.2); padding: 25px; border-radius: 20px; max-width: 450px; width: 100%; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.5); position: relative; z-index: 2; }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Comic Sans MS', 'Chalkboard SE', sans-serif; }
+        body { background: linear-gradient(135deg, #ff007f, #7928ca, #00d2ff); color: #fff; min-height: 100vh; display: flex; justify-content: center; align-items: center; padding: 20px; overflow-x: hidden; }
+        .container { background: rgba(0, 0, 0, 0.4); backdrop-filter: blur(15px); border: 2px dashed #ffb86c; padding: 25px; border-radius: 25px; max-width: 450px; width: 100%; text-align: center; box-shadow: 0 15px 35px rgba(0,0,0,0.6); position: relative; z-index: 2; }
+        
         .input-group { margin-bottom: 12px; text-align: left; }
-        label { font-size: 13px; color: #cbd5e1; margin-bottom: 4px; display: block; }
-        input, textarea { width: 100%; padding: 10px; border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.2); background: rgba(0, 0, 0, 0.3); color: #fff; font-size: 14px; outline: none; }
-        button, .video-btn { width: 100%; padding: 12px; background: linear-gradient(45deg, #ff007f, #7928ca); border: none; color: white; font-size: 16px; font-weight: bold; border-radius: 10px; cursor: pointer; margin-top: 10px; display: inline-block; text-decoration: none; box-shadow: 0 4px 15px rgba(255, 0, 127, 0.3); }
+        label { font-size: 13px; color: #ffb86c; margin-bottom: 4px; display: block; font-weight: bold; }
+        input, textarea { width: 100%; padding: 12px; border-radius: 12px; border: 2px solid #ff79c6; background: rgba(255, 255, 255, 0.1); color: #fff; font-size: 14px; outline: none; }
+        
+        button, .funny-btn { width: 100%; padding: 14px; background: linear-gradient(45deg, #ffb86c, #ff5555); border: none; color: #000; font-size: 17px; font-weight: 900; border-radius: 15px; cursor: pointer; margin-top: 10px; display: inline-block; text-decoration: none; box-shadow: 0 5px 15px rgba(255, 184, 108, 0.4); transition: transform 0.2s; }
+        button:active, .funny-btn:active { transform: scale(0.95); }
+        
         #qrcode-container { margin-top: 15px; display: none; flex-direction: column; align-items: center; }
-        #qrImage { background: white; padding: 10px; border-radius: 12px; width: 180px; height: 180px; margin-bottom: 10px; }
-        .title { font-size: 1.8rem; color: #ff79c6; margin-bottom: 10px; }
-        .name { font-size: 2rem; color: #50fa7b; font-weight: bold; margin-bottom: 15px; }
-        .video-box { width: 100%; border-radius: 12px; overflow: hidden; margin-bottom: 15px; background: rgba(0, 0, 0, 0.4); border: 1px solid rgba(255, 255, 255, 0.1); }
+        #qrImage { background: white; padding: 10px; border-radius: 15px; width: 190px; height: 190px; margin-bottom: 10px; border: 4px solid #50fa7b; }
+        
+        .title { font-size: 2rem; color: #f1fa8c; margin-bottom: 5px; text-shadow: 2px 2px #ff79c6; }
+        .subtitle { font-size: 1rem; color: #8be9fd; margin-bottom: 15px; font-style: italic; }
+        .name { font-size: 2.3rem; color: #50fa7b; font-weight: 900; margin-bottom: 15px; text-shadow: 0 0 10px #50fa7b; }
+        
+        .video-box { width: 100%; border-radius: 15px; overflow: hidden; margin-bottom: 15px; background: #000; border: 2px solid #ff79c6; }
         .video-box iframe { width: 100%; height: 220px; border: none; display: block; }
-        .message-box { background: rgba(255, 255, 255, 0.1); padding: 15px; border-radius: 12px; font-size: 0.95rem; line-height: 1.4; color: #f8f8f2; margin-bottom: 15px; text-align: left; border-left: 4px solid #ff79c6; }
-        .balloon { position: absolute; width: 40px; height: 60px; background: rgba(255, 121, 198, 0.7); border-radius: 50%; animation: floatUp 8s linear infinite; bottom: -100px; z-index: 1; }
-        @keyframes floatUp { 0% { transform: translateY(0); opacity: 1; } 100% { transform: translateY(-120vh); opacity: 0; } }
+        
+        .funny-box { background: rgba(255, 255, 255, 0.15); padding: 18px; border-radius: 15px; font-size: 1.05rem; line-height: 1.5; color: #fff; margin-bottom: 15px; text-align: left; border-left: 6px solid #f1fa8c; box-shadow: inset 0 0 10px rgba(0,0,0,0.2); }
+        
+        .meme-badge { background: #ff5555; color: #fff; font-size: 12px; font-weight: bold; padding: 3px 8px; border-radius: 10px; display: inline-block; margin-bottom: 8px; }
+
+        .balloon { position: absolute; width: 45px; height: 65px; border-radius: 50%; animation: floatUp 6s linear infinite; bottom: -100px; z-index: 1; opacity: 0.8; }
+        @keyframes floatUp { 0% { transform: translateY(0) rotate(0deg); opacity: 1; } 100% { transform: translateY(-120vh) rotate(360deg); opacity: 0; } }
     </style>
 </head>
 <body>
@@ -29,37 +40,43 @@
     <div class="container">
         <!-- FORM SECTION -->
         <div id="setup-section">
-            <h2 style="margin-bottom: 15px; color: #ff79c6;">🎉 Birthday Video QR Generator</h2>
+            <h2 style="margin-bottom: 10px; color: #f1fa8c;">🤪 Funny Birthday QR Generator</h2>
             <div class="input-group">
-                <label>Naam:</label>
-                <input type="text" id="nameInput" placeholder="Soni">
+                <label>Naam (Jisko Chhedna Hai):</label>
+                <input type="text" id="nameInput" placeholder="Soni 🙈">
             </div>
             <div class="input-group">
-                <label>Google Drive ya Video Link:</label>
-                <input type="text" id="videoInput" placeholder="Drive ka link paste karein">
+                <label>Video / Meme Link (Optional):</label>
+                <input type="text" id="videoInput" placeholder="Drive ya Youtube link">
             </div>
             <div class="input-group">
-                <label>Birthday Wish Message:</label>
-                <textarea id="msgInput" rows="3" placeholder="Happy Birthday!"></textarea>
+                <label>Funny Birthday Message:</label>
+                <textarea id="msgInput" rows="4" placeholder="Janamdin Mubarak Ho! Bhagwan Kare Tera Dimaag Thoda Bada Ho Jaye! 😂"></textarea>
             </div>
-            <button onclick="generateQR()">QR Code Banayein</button>
+            <button onclick="generateQR()">😜 QR Code Banayein</button>
 
             <div id="qrcode-container">
-                <h4 style="color: #50fa7b; margin-bottom: 8px;">Aapka QR Code Tayar Hai!</h4>
+                <h4 style="color: #50fa7b; margin-bottom: 8px;">Aapka Funny QR Code Tayar Hai! 🚀</h4>
                 <img id="qrImage" src="" alt="QR Code">
-                <p style="font-size: 11px; color: #cbd5e1;">Is image ko download karke print nikalwa lein.</p>
+                <p style="font-size: 11px; color: #f1fa8c;">Is QR ko download karke gift par chipka do!</p>
             </div>
         </div>
 
-        <!-- WISH & VIDEO SECTION -->
+        <!-- FUNNY WISH PAGE -->
         <div id="wish-section" style="display: none;">
-            <h1 class="title">🎂 HAPPY BIRTHDAY! 🎂</h1>
+            <div class="meme-badge">⚠️ WARNING: OVERDOSE OF DRAMA ⚠️</div>
+            <h1 class="title">🎉 HAPPY BIRTHDAY! 🎉</h1>
+            <div class="subtitle">1 Saal Aur Boodhi Ho Gayi! 😜</div>
             <div class="name" id="displayName"></div>
             
             <div class="video-box" id="videoContainer"></div>
 
-            <div class="message-box" id="displayMsg"></div>
-            <button onclick="triggerConfetti()">🎉 Celebration Dubara Dekhein</button>
+            <div class="funny-box">
+                <strong>📜 Funny Message:</strong><br>
+                <span id="displayMsg"></span>
+            </div>
+
+            <button onclick="popDhamaka()" style="background: linear-gradient(45deg, #50fa7b, #8be9fd); color: #000;">💥 Ye Button Mat Dabana! (Dhamaka)</button>
         </div>
     </div>
 
@@ -73,7 +90,7 @@
             if (name && msg) {
                 document.getElementById('setup-section').style.display = 'none';
                 document.getElementById('wish-section').style.display = 'block';
-                document.getElementById('displayName').innerText = decodeURIComponent(name);
+                document.getElementById('displayName').innerText = decodeURIComponent(name) + " 🧟‍♀️";
                 document.getElementById('displayMsg').innerText = decodeURIComponent(msg);
 
                 let rawUrl = decodeURIComponent(video || '');
@@ -90,15 +107,15 @@
                 if (rawUrl) {
                     document.getElementById('videoContainer').innerHTML = `
                         <iframe src="${embedUrl}" allow="autoplay"></iframe>
-                        <div style="padding: 10px; background: rgba(0,0,0,0.5);">
-                            <a href="${rawUrl}" target="_blank" class="video-btn" style="margin-top: 0; font-size: 14px;">▶️ Video Fullscreen Play Karein</a>
+                        <div style="padding: 8px; background: rgba(0,0,0,0.6);">
+                            <a href="${rawUrl}" target="_blank" class="funny-btn" style="margin-top: 0; font-size: 13px;">▶️ Video Fullscreen Me Dekho</a>
                         </div>
                     `;
                 } else {
                     document.getElementById('videoContainer').style.display = 'none';
                 }
 
-                triggerConfetti();
+                popDhamaka();
                 createBalloons();
             }
         };
@@ -109,7 +126,7 @@
             const msg = document.getElementById('msgInput').value.trim();
 
             if (!name || !msg) {
-                alert("Naam aur Message dono bharein!");
+                alert("Naam aur Message dono likho, kanjoosi mat karo! 😜");
                 return;
             }
 
@@ -122,14 +139,19 @@
             document.getElementById('qrcode-container').style.display = 'flex';
         }
 
-        function triggerConfetti() {
-            confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
+        function popDhamaka() {
+            // Confetti Cannon Blast
+            confetti({ particleCount: 120, spread: 100, origin: { y: 0.5 } });
+            setTimeout(() => {
+                confetti({ particleCount: 80, angle: 60, spread: 55, origin: { x: 0 } });
+                confetti({ particleCount: 80, angle: 120, spread: 55, origin: { x: 1 } });
+            }, 300);
         }
 
         function createBalloons() {
             const container = document.getElementById('balloon-container');
-            const colors = ['#ff79c6', '#8be9fd', '#50fa7b', '#ffb86c', '#bd93f9'];
-            for (let i = 0; i < 12; i++) {
+            const colors = ['#ff79c6', '#8be9fd', '#50fa7b', '#ffb86c', '#ff5555', '#f1fa8c'];
+            for (let i = 0; i < 15; i++) {
                 let balloon = document.createElement('div');
                 balloon.className = 'balloon';
                 balloon.style.left = Math.random() * 100 + 'vw';
